@@ -20,10 +20,10 @@ vidrio_entry = IntVar(master=ventana,name="vid")
 # Función para calcular el presupuesto
 def calcular_presupuesto():
     # Obtener los datos ingresados por el usuario
-    ancho = ancho_entry.get()
-    alto = alto_entry.get()
-    hojas = hojas_entry.get()
-    vidrio = vidrio_entry.get()
+    ancho = float(ancho_entry.get())
+    alto = float(alto_entry.get())
+    hojas = float(hojas_entry.get())
+    vidrio = float(vidrio_entry.get())
     # Cálculos de los accesorios, perfiles de aluminio y vidrios
     antiruidos = 4 * hojas * 10.4
     escuadras = 4 * 227
