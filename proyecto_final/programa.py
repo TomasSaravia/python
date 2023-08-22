@@ -11,19 +11,19 @@ ventana.geometry("1000x600")
 ventana.resizable(False, False)
 ventana.iconbitmap("imagenes/logo.ico")
 
-ancho_entry = DoubleVar(master=ventana,name="anch")
-alto_entry = DoubleVar(master=ventana,name="alt")
-hojas_entry = IntVar(master=ventana,name="hoj")
-vidrio_entry = IntVar(master=ventana,name="vid")
+ancho_ent = DoubleVar(master=ventana,name="anch")
+alto_ent = DoubleVar(master=ventana,name="alt")
+hojas_ent = IntVar(master=ventana,name="hoj")
+vidrio_ent = IntVar(master=ventana,name="vid")
 
 
 # Función para calcular el presupuesto
 def calcular_presupuesto():
     # Obtener los datos ingresados por el usuario
-    ancho = ancho_entry.get()
-    alto = alto_entry.get()
-    hojas = hojas_entry.get()
-    vidrio = vidrio_entry.get()
+    ancho = ancho_ent.get()
+    alto = alto_ent.get()
+    hojas = hojas_ent.get()
+    vidrio = vidrio_ent.get()
     # Cálculos de los accesorios, perfiles de aluminio y vidrios
     antiruidos = 4 * hojas * 10.4
     escuadras = 4 * 227
@@ -127,19 +127,19 @@ telefono_entry = Entry(ventana)
 telefono_entry.pack()
 
 anch = Label(ventana, text="Ancho de la ventana (metros):").pack()
-ancho_entry = Entry(ventana,textvariable=ancho_entry)
+ancho_entry = Entry(ventana,textvariable=ancho_ent)
 ancho_entry.pack()
 
 alt = Label(ventana, text="Alto de la ventana (metros):").pack()
-alto_entry = Entry(ventana,textvariable=alto_entry)
+alto_entry = Entry(ventana,textvariable=alto_ent)
 alto_entry.pack()
 
 hoj = Label(ventana, text="Cantidad de hojas:").pack()
-hojas_entry = Entry(ventana,textvariable=hojas_entry)
+hojas_entry = Entry(ventana,textvariable=hojas_ent)
 hojas_entry.pack()
 
 vid = Label(ventana, text="Vidrio (3mm o 4mm):").pack()
-vidrio_entry = Entry(ventana,textvariable=vidrio_entry)
+vidrio_entry = Entry(ventana,textvariable=vidrio_ent)
 vidrio_entry.pack()
 
 
