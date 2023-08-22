@@ -1,0 +1,5 @@
+tkinter = 0.1.0
+
+smtplib
+
+Pillow = 10.0.0
