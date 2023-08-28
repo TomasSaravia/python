@@ -4,27 +4,13 @@ from email.mime.text import MIMEText
 from smtplib import SMTP
 from PIL import Image, ImageTk
 
-# Crear la ventana principal
-ventana = Tk()
-ventana.title("Calculadora de Precios de Ventanas")
-ventana.geometry("1000x600")
-ventana.resizable(False, False)
-ventana.iconbitmap("imagenes/logo.ico")
-
-ancho_ent = DoubleVar(master=ventana,name="anch")
-alto_ent = DoubleVar(master=ventana,name="alt")
-hojas_ent = IntVar(master=ventana,name="hoj")
-vidrio_ent = IntVar(master=ventana,name="vid")
-
-
-# Función para calcular el presupuesto
 def calcular_presupuesto():
-    # Obtener los datos ingresados por el usuario
+    
     ancho = ancho_ent.get()
     alto = alto_ent.get()
     hojas = hojas_ent.get()
     vidrio = vidrio_ent.get()
-    # Cálculos de los accesorios, perfiles de aluminio y vidrios
+
     antiruidos = 4 * hojas * 10.4
     escuadras = 4 * 227
     goma_amortiguadora = 4 * hojas * 6
@@ -41,7 +27,6 @@ def calcular_presupuesto():
     vidrio_3mm = hojas * alto * 4600 if vidrio == 3 else 0
     vidrio_4mm = hojas * alto * 4800 if vidrio == 4 else 0
 
-    # Cálculo del presupuesto final con desperdicio y ganancia
     desperdicio = (antiruidos + escuadras + goma_amortiguadora + ruedas + burlete + felpa + tornillos + parker +
                    marco + travesano + central + lateral + vidrio_3mm + vidrio_4mm) * 0.05
     ganancia = (antiruidos + escuadras + goma_amortiguadora + ruedas + burlete + felpa + tornillos + parker +
@@ -49,7 +34,7 @@ def calcular_presupuesto():
     total = antiruidos + escuadras + goma_amortiguadora + ruedas + burlete + felpa + tornillos + parker + marco + \
             travesano + central + lateral + vidrio_3mm + vidrio_4mm + desperdicio + ganancia
 
-    # Crear la tabla con los materiales y precios
+    
     presupuesto = f'''
     NOMBRE: {nombre_entry.get()}
     MAIL: {mail_entry.get()}
@@ -75,45 +60,49 @@ def calcular_presupuesto():
     TOTAL             |          | ${total:.2f}
     '''
 
-    # Mostrar el presupuesto en un messagebox
+   
     messagebox.showinfo("Presupuesto", presupuesto)
 
+    enviar_correo(presupuesto)
+    
     ventana.mainloop()
 
-    # Enviar el presupuesto por correo electrónico
-    enviar_correo(presupuesto)
 
 
-# Función para enviar el correo electrónico con el presupuesto
 def enviar_correo(presupuesto):
-    #este es el mensaje que se envia 
+
     mensaje = (f"Presupuesto\n\n{presupuesto}")
     
-    #aca van la direccion de correo a donde se envian
     remitente = "UnSoloUso5151@gmail.com"
     destinatario = "UnSoloUso5151@gmail.com"
     
-    # Crear el mensaje de correo
     mensaje_correo = MIMEText(mensaje)
     mensaje_correo["From"] = remitente
     mensaje_correo["To"] = destinatario
     mensaje_correo["Subject"] = "Prueba de envio de mail"
     
-    #conexion con el servidor
     servidor = SMTP("smtp.gmail.com", 587)
     servidor.ehlo()
     servidor.starttls()
     
-    #todo lo demas
     servidor.login("UnSoloUso5151@gmail.com", "kjquduioootukkao")
-    # Enviar el correo electrónico al cliente
+    
     servidor.sendmail(remitente, destinatario, mensaje_correo.as_string())
-    # Cerrar la conexión con el servidor de correo
+    
     servidor.quit()
 
 
+ventana = Tk()
+ventana.title("Calculadora de Precios de Ventanas")
+ventana.geometry("1000x600")
+ventana.resizable(False, False)
+ventana.iconbitmap("imagenes/logo.ico")
 
-# labels que van en pantalla
+ancho_ent = DoubleVar(master=ventana,name="anch")
+alto_ent = DoubleVar(master=ventana,name="alt")
+hojas_ent = IntVar(master=ventana,name="hoj")
+vidrio_ent = IntVar(master=ventana,name="vid")
+
 Label(ventana, text="Nombre:").pack()
 nombre_entry = Entry(ventana)
 nombre_entry.pack()
@@ -142,13 +131,11 @@ vid = Label(ventana, text="Vidrio (3mm o 4mm):").pack()
 vidrio_entry = Entry(ventana,textvariable=vidrio_ent)
 vidrio_entry.pack()
 
-
 Label(ventana, text="Imagen de referencia: 2 hojas").place(x=0,y=0)
 Label(ventana, text="Imagen de referencia: 2 hojas 1 fija").place(x=0,y=100)
 Label(ventana, text="Imagen de referencia: 2 cuartos").place(x=0,y=200)
 Label(ventana, text="Imagen de referencia: 3 hojas").place(x=0,y=300)
 Label(ventana, text="Imagen de referencia: 4 hojas").place(x=0,y=400)
-
 
 image_1 = Image.open("imagenes/pngwing2h.png")
 image_1 = image_1.resize((50, 50))
@@ -161,13 +148,11 @@ image_4 = image_4.resize((50, 50))
 image_5 = Image.open("imagenes/pngwing4h.png")
 image_5 = image_5.resize((50, 50))
 
-
 photo_1 = ImageTk.PhotoImage(image_1)
 photo_2 = ImageTk.PhotoImage(image_2)
 photo_3 = ImageTk.PhotoImage(image_3)
 photo_4 = ImageTk.PhotoImage(image_4)
 photo_5 = ImageTk.PhotoImage(image_5)
-
 
 image_label_1 = Label(ventana, image=photo_1)
 image_label_1.place(x=50,y=30)
