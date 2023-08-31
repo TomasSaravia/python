@@ -85,7 +85,7 @@ def enviar_correo(presupuesto):
     servidor.ehlo()
     servidor.starttls()
     
-    servidor.login("UnSoloUso5151@gmail.com", "kjquduioootukkao")
+    servidor.login("UnSoloUso5151@gmail.com", "")
     
     servidor.sendmail(remitente, destinatario, mensaje_correo.as_string())
     
